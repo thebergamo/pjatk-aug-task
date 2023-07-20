@@ -1,0 +1,245 @@
+/[ \t\n\r]/               { /* Skip spaces and tabs. */ }
+/\(/		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return OPEN_PAREN
+}
+/\)/		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return CLOSE_PAREN
+}
+/\+/		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return PLUS
+}
+/\-/		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return MINUS
+}
+/\*/		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return MULTIPLY
+}
+/\//		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return DIVIDE
+}
+/\%/		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return MOD 
+}
+/,/		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return COMMA
+}
+/;/		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return SEMICOLON
+}
+/=/		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return EQ
+}
+/<>/		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return NEQ
+}
+/</		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return LT
+}
+/>/		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return GT
+}
+/<=/		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return LTE
+}
+/>=/		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return GTE
+}
+/==/		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return STR_EQ 
+}
+/!=/		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return STR_NEQ 
+}
+/and/		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return AND
+}
+/or/		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return OR
+}
+/not/		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return NOT
+}
+/true/		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return TRUE 
+}
+/false/		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return FALSE 
+}
+/if/		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return IF 
+}
+/then/		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return THEN 
+}
+/else/		{
+	yylex.pos(lval) // our pos
+	lval.str = yylex.Text()
+	return ELSE
+}
+/print/	{
+	yylex.pos(lval)
+	lval.str = yylex.Text()
+	return FN_PRINT
+}
+/length/{
+	yylex.pos(lval)
+	lval.str = yylex.Text()
+	return FN_LENGTH 
+}
+/position/{
+	yylex.pos(lval)
+	lval.str = yylex.Text()
+	return FN_POSITION 
+}
+/concatenate/{
+	yylex.pos(lval)
+	lval.str = yylex.Text()
+	return FN_CONCATENATE 
+}
+/substring/{
+	yylex.pos(lval)
+	lval.str = yylex.Text()
+	return FN_SUBSTRING 
+}
+/readint/{
+	yylex.pos(lval)
+	lval.str = yylex.Text()
+	return FN_READINT
+}
+/readstr/{
+	yylex.pos(lval)
+	lval.str = yylex.Text()
+	return FN_READSTR 
+}
+/begin/{
+	yylex.pos(lval)
+	lval.str = yylex.Text()
+	return BEGIN 
+}
+/end/{
+	yylex.pos(lval)
+	lval.str = yylex.Text()
+	return END 
+}
+/for/{
+	yylex.pos(lval)
+	lval.str = yylex.Text()
+	return FOR 
+}
+/to/{
+	yylex.pos(lval)
+	lval.str = yylex.Text()
+	return TO 
+}
+/do/{
+	yylex.pos(lval)
+	lval.str = yylex.Text()
+	return DO 
+}
+/break/{
+	yylex.pos(lval)
+	lval.str = yylex.Text()
+	return BREAK 
+}
+/continue/{
+	yylex.pos(lval)
+	lval.str = yylex.Text()
+	return CONTINUE 
+}
+/exit/{
+	yylex.pos(lval)
+	lval.str = yylex.Text()
+	return EXIT
+}
+/:=/	{
+	yylex.pos(lval);
+	lval.str = yylex.Text();
+	return ASSIGN
+}
+/"(\\.|[^"])*"/	{
+	yylex.pos(lval) // our pos
+	s := yylex.Text()
+
+	if s[0:1] != "\"" || s[len(s)-1:] != "\"" {
+		panic(fmt.Sprintf("error lexing STRING, got: %s", s))
+	}
+
+	lval.str = s[1:len(s)-1] // remove the two quotes
+	return STRING
+}
+/[a-zA-Z][a-zA-Z0-9]*/  {
+	yylex.pos(lval);
+	lval.str = yylex.Text();
+	return IDENT
+}
+/-?[0-9]+/	{
+	yylex.pos(lval)
+	lval.str = yylex.Text()
+	return NUM
+}
+/./		{
+	yylex.pos(lval) // our pos
+	s := yylex.Text()
+	lp := yylex.cast()
+	e := Error("Unrecognized")
+	lp.lexerErr = &LexParseErr{
+		Err: e,
+		Str: s,
+		Row: yylex.Line(),
+		Col: yylex.Column(),
+	}
+	return ERROR
+}
+//
+package main
+import ("fmt")
+func (yylex Lexer) Stub(e string) {
+}

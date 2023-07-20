@@ -1,0 +1,85 @@
+print("TEST assignment");
+marcos := "c";
+amanda := 10;
+newVar := marcos;
+
+print(1 * 2);
+
+print(marcos);
+print(amanda);
+print(newVar);
+
+print("TEST functions");
+print(concatenate("a","b"));
+print(length(marcos));
+print(position("marcos", marcos));
+print(substring("marcos", 2, 3));
+print(-10);
+print("TEST inputs");
+print("Enter age");
+num := readint;
+print("Your age is:");
+print(num);
+print("Enter name");
+name := readstr;
+print("Your name is:");
+print(name);
+
+print("TEST Boolean Expressions");
+print(true);
+print(false);
+
+print("TEST String comparsion");
+print("a" == "a");
+print("a" != "b");
+print("TEST Number comparsion");
+print(1 = 1);
+print(1 <> 2);
+print(1 < 2);
+print(2 > 1);
+print(2 >= 2);
+print(2 <= 3);
+
+print("TEST Boolean logic");
+print(true or false);
+print(false or false);
+print(true and true);
+print(true and false);
+
+print((1 = 1) and ("a" == "a"));
+print(not true);
+print(not 1 = 1);
+
+print("TEST If statement");
+if true then print("if true");
+
+if false then print("false") else print("else false");
+
+if (1 <> 1) then print("empty") else if (true) then print("else if true");
+
+print("TEST Begin and End block");
+
+if (true) then begin
+    marcos := 10;
+    print("marcos inside if");
+    print(marcos);
+    print("amanda inside if");
+    print(amanda);
+end;
+print("marcos again outside if");
+print(marcos);
+
+print("TEST For loop");
+for i := 0 to 10 do print(i);
+
+for i := 1 to 10 do begin
+    for j := 1 to 10 do print(i * j);
+end;
+
+print("TEST break and continue");
+for i := 1 to 10 do begin
+    if (i % 2) = 0 then continue else print(i);
+    if i = 5 then break;
+end;
+
+exit;
